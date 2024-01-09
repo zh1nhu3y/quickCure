@@ -3,13 +3,10 @@ from flask_mysqldb import MySQL, MySQLdb
 import base64
 from flask_session import Session
 from datetime import datetime, timedelta
-from flask_restful import Resource, Api, reqparse
-import nltk
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 
 app = Flask(__name__)
-api = Api(app)
+
 app.secret_key = '123'
 app.jinja_env.filters['zip'] = zip
 
@@ -298,6 +295,11 @@ def saved_procedure():
     cur.close()
 
     return render_template('savedProcedure.html', user_id=user_id, saved_procedures=saved_procedures)
+
+
+@app.route("/send_help")
+def sendHelp():
+    return render_template('sendHelp.html')
 
 
 if __name__ == "__main__":

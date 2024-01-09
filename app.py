@@ -299,7 +299,9 @@ def saved_procedure():
 
 @app.route("/send_help")
 def sendHelp():
-    return render_template('sendHelp.html')
+    user_id = session.get('id')
+    
+    return render_template('sendHelp.html', user_id=user_id)
 
 
 if __name__ == "__main__":

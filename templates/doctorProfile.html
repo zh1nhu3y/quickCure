@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+
+{% block head %}
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='doctorProfile.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css')}}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+
+
+{% block body %}
+    <div style="padding: 20px 20px 40px 20px">
+        {% if doc_data %}
+            {% for doctor in doc_data %}
+            <div class="doc-box">
+                <div class="doc-info-box">
+                    <div class="doc-info-parent">
+
+                        <div class="doc-info-child-a">
+                            {% if doctor['doctor_img_base64'] %}
+                                <img src="data:image/jpeg;base64,{{ doctor['doctor_img_base64'] }}" alt="doctor Image">
+                            {% endif %}
+                        </div>
+                        <div class="doc-info-child-b">
+                            <h1>{{ doctor['doctor_name'] }}</h1>
+                            <h4>{{ doctor['doctor_position'] }}</h4>
+                            <a href="#"><i class="fa fa-envelope"></i>&nbsp;{{ doctor['doctor_email'] }}</a>
+                        </div>                           
+                    </div>                  
+                </div>
+
+                <div class="horizontal-line"></div>
+
+                <div class="doc-qualification">
+                    <div class="left-content">
+                        <h3>Academic and Professional Qualification</h3>
+                        <ul>
+                            <li>{{ doctor['doctor_qualification'] }}</li>
+                            <li>FRCP(Lon) Fellowship of the Royal College of Physicians of London</li>
+                            <li>MRCP(UK) Membership of the Royal College of Physicians, UK</li>
+                            <li>MBBS University of Malaya</li>
+                            <li>LRCP Licentiate of the Royal College of Physicians of London</li>
+                            <li>MRCS Member of the RoYal College of Surgeons of England</li>
+                            
+                        </ul>
+                    </div>
+
+                    <div class="vl"></div>
+
+                    <div class="right-content">
+                        {% if doctor['verified_procedure']%}
+                            <h3>Verified Procedures</h3>
+                            <ul>
+                                {% for procedure in doctor.verified_procedure %}
+                                    <li><a href="{{url_for('contentPage', id=procedure.fa_id)}}">{{ procedure.fa_title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+
+                    </div>
+                </div>
+
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No data Available</p>
+        {% endif %}
+    </div>
+{% endblock %}

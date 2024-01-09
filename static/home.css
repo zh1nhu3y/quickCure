@@ -1,0 +1,107 @@
+.home-container {
+    height: 100%;
+    min-height: 85vh;
+}
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+}
+
+.title {
+    font-size: 70px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #365486;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+}
+
+.search-wrapper {
+    position: relative;
+}
+
+.search-input {
+    width: 700px;
+    height: 50px;
+    padding: 2px 20px 2px 50px;
+    border-radius: 50px;
+    background: #fff;
+    border: none;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.search-input:focus {
+    outline: none;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    left: 20px; /* Adjust the right position based on your design */
+    transform: translateY(-50%);
+    color: #596FB7;
+}
+
+.recommendation-cont{
+    width: 700px;
+    padding-top: 50px;
+    margin: 0 auto;
+    padding-bottom: 100px;
+}
+.rec-title h5 {
+    margin-bottom: 15px;
+    border-bottom: 3px solid #304D30;
+    width: 250px;
+    font-weight: 600;
+    color: #30475E;
+}
+.rec-procedure {
+    margin-bottom: 10px; 
+    color: #304D30;  
+}
+.rec-procedure i {
+    color: #596FB7;
+}
+.rec-procedure a{
+    text-decoration: none;
+    color: #304D30;
+    margin-left: 10px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+.rec-procedure a:hover{
+    padding: 10px;
+    color: #61A3BA;
+}
+
+.search-result{
+    width: 700px;
+    max-height: 300px;
+}
+.search-result ul {
+    background: #fff;
+    border-radius: 15px;
+    /* border: 1px solid #eee; */
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    margin-top: 3px;
+    padding: 10px 0; 
+}
+.search-result a{
+    text-decoration: none;
+    color: #265073;
+}
+.search-result ul li {
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    padding: 15px 10px 15px 30px;
+    cursor: pointer;
+}
+.search-result ul li:hover {
+    background: #F5F7F8;
+
+}

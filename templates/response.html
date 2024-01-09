@@ -1,0 +1,11 @@
+{% if titles %}
+    <ul>
+        {% for title in titles %}
+        <a href="/content/{{ title.fa_id }}"><li>{{ title.fa_title }}</li></a>
+        {% endfor %}
+    </ul>
+{% else %}
+    <ul>
+        <li>No result found</li>
+    </ul>
+{% endif %}

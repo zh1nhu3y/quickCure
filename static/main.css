@@ -1,0 +1,225 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
+    
+}
+body{
+    background: #F1F0EB;
+}
+/* header */
+.slogan {
+    text-align: center;
+    padding: 7px;
+    background: #e2f9b8;
+    color: #304D30;
+    font-weight: 600;
+}
+header {
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    background: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+}
+.logo {
+    font-size: 26px;
+    user-select: none;
+    font-weight: 600;
+}
+.nav-item, .login-button {
+    position: relative;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+    color: #304D30;
+    font-weight: 600;
+}
+.nav-item {
+    margin-top: 8px;
+}
+.nav-item::after, .login-button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 3px;
+    background: #596FB7;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: transform .5s ;
+}
+.nav-item:hover::after, .login-button:hover::after{
+    transform: scaleX(1);
+}
+.nav-item:hover {
+    text-decoration: none;
+    color: #596FB7;
+}
+.login-button {
+    border: none;
+    background: none;
+    border: none;
+    outline: none;
+}
+.login-button:focus {
+    border: none;
+    outline: none;
+}
+.nav .btnSearch {
+    width: 130px;
+    height: 40px;
+    background: transparent;
+    background-color: #304D30;
+    color: #fff;
+    outline: none;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 40px;
+    transition: .5s;
+}
+
+.nav .btnSearch:hover {
+    border: 2px solid #304D30;
+    background: #fff;
+    color: #304D30;
+}
+
+.modal-body {
+    padding: 20px 40px;
+}
+
+.modal-content {
+    border-radius: 20px;
+    padding: 10px 0;
+}
+
+/* profile menu */
+.nav ul {
+    text-decoration: none;
+    flex-direction: column;
+    position: absolute;
+    background: #fff;
+    align-items: center;
+    width: 190px;
+    right: 250px;
+    top: 100px;
+    border-radius: 5px;
+    gap: 0;
+    /* padding-top: 20px; */
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    list-style:none;
+    display: none;
+    color: #164863;
+    z-index: 6;
+}
+.sub-item {
+    width: 100%;
+    transition: all .2s ease;
+    padding: 10px 0;
+}
+.sub-item i {
+    margin-left: 20px;
+}
+.menu a{
+    text-decoration: none;
+    width: 100%;
+    color: #164863;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: -1px;
+    margin-left: 10px;
+}
+.sub-item:hover i{
+    transform: scale(1.1);
+}
+.sub-item:hover{
+    border-left: 4px solid #337CCF;
+    background: whitesmoke;
+}
+.profile-icon:hover, .login-button:hover, .profile-icon:hover i{
+    cursor: pointer;
+    color: #596FB7;
+}
+.btn {
+    width: 100%;
+    border-radius: 50px;
+    font-weight: 600;
+}
+.btn-login{
+    background-color: #304D30;
+    color: #fff;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    transition: all .3s ease;
+}
+.btn-login:hover {
+    background: #739072;
+}
+.login-title {
+    font-weight: 700;
+    color: #304D30;
+}
+.btn-signup {
+    border: 1px solid #AEC3AE;
+    color: #304D30;
+    background: none;
+}
+.btn-signup:hover {
+    background: #AEC3AE;
+    color: #304D30;
+}
+#message1, #message2 {
+    font-size: 14px;
+}
+.signup-title {
+    font-weight: 700;
+    color: #092532;
+}
+
+/* footer */
+.footer_box {
+    background-color: #1E5128;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+
+}
+.footer_desc {
+    color: whitesmoke;
+    padding: 10px 100px 10px 50px;
+}
+.footer_desc h1{
+    font-size: 40px;
+    padding-top: 20px;
+}
+.footer_box h3 {
+    color: whitesmoke;
+    padding-top: 20px;
+
+
+}
+.footer_nav {
+    list-style-type: none;
+}
+.footer_nav_item {
+    padding: 3px;
+}
+.footer_nav a {
+    text-decoration: none;
+    color: whitesmoke;
+    
+}
+.footer_nav a:hover {
+    color: #A7D129;
+}

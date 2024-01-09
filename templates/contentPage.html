@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Save Life With Quick Cure</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='contentPage.css')}}" type="text/css">
+    <script src="https://kit.fontawesome.com/0e630086cb.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block body %}
+    <div>
+        {% if content %}
+            {% for cont in content %}
+                <div class="content-box-1">
+                    <div class="content-title">
+                        <h1>{{ cont['fa_title'] }}</h1>
+
+                        <h3><i class="fa-solid fa-circle-check" style="color: #579eea;"></i>&nbsp;Verified By: <a href="{{ url_for('doctorProfile', doctor_id=cont['doctor_id']) }}">{{ cont['doctor_name'] }}</a></h3>
+                    </div>
+
+                    <div class="save">
+                        <form action="/toggle_save/{{id}}" method="post" >
+                            <button type="submit" class="icon-button" {% if user_id is none or user_id == '' %} disabled data-toggle="tooltip" data-placement="top" title="Login to Save!"{% endif %}>
+                                {% if saved|length %}
+                                    <i class="fa-solid fa-bookmark"></i>
+                                {% else %}
+                                    <i class="fa-regular fa-bookmark"></i>
+                                {% endif %}
+                            </button>
+                        </form>
+                        <p>{{ save_count }}</p>
+                    </div>
+
+                    <div class="content-box-2">
+                        {% for img, proc in cont['content'] %}
+                            <div class="content-box-3">
+                                <div class="img_container">
+                                    {% if img %}
+                                    <img src="data:image/png;base64,{{ img }}" alt="Content Image">
+                                    {% endif %}
+                                </div>
+                                {% if proc %}
+                                <div class="proc-container">
+                                    <p>{{ proc }}</p>                              
+                                </div>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            
+        {% else %}
+            <div class="content-box-1">
+                <div class="content-title">
+                    <h1>{{ content[0]['fa_title'] }}</h1>
+                    <h3>No content available for this procedure.</h3>
+                </div>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    
+    <div class="comment-container">
+        <div class="comment-count">
+            {% if comments %}
+            <h4>{{ comments|length }} {% if comments|length > 1 %}COMMENTS{% else %}COMMENT{% endif %}</h4>
+            {% else %}
+            <h4>0 COMMENT</h4>
+            {% endif %}
+        </div>
+        <hr>
+        {% if user_id %}
+            <div class="write-comment">
+                <form action="/save_comment/{{id}}" method="post">
+                    <textarea name="comment" id="comment" required cols="15" rows="5" placeholder="Write a comment" class="form-control"></textarea>
+                    <input type="submit" value="Post Comment" class="btn btn-comment">
+                </form>
+            </div>
+        {% else %}
+            <div class="comment-login">
+                <h4>Join the community to comment</h4>
+                <button class="btn join-btn" data-toggle="modal" data-target="#login-modal">Login</button>
+            </div>
+        {% endif %}
+        <hr>
+        <div class="comment-section">
+            {% for comment in comments %}
+                <div class="comment">
+                    <div class="comment-head">
+                        <h5>{{comment.user_email.split('@')[0]}}</h5>
+                        <p>{{ format_datetime(comment.comment_datetime) }}</p>
+                    </div>
+                    <h5>{{comment.comment_content}}</h5>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='savedProcedure.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css')}}" type="text/css">
+
+{% endblock %}
+
+{% block body %}
+<div class="saved-procedure-container">
+    <div class="saved-procedure-title">
+        <h3>Saved Procedure</h3>
+    </div>
+    <div class="procedure-list-container">
+        {% if saved_procedures%}
+            {% for procedure in saved_procedures%}
+                <div class="saved-procedure">
+                    <a href="/content/{{ procedure['fa_id']}}"><h5>{{ procedure['fa_title'] }}</h5></a>
+                </div>
+            {% endfor%}
+        {% endif %}
+    </div>
+    
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+body {
+    margin: 0px;
+}
+.our_doctors_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    min-height: 70vh;
+}
+.border {
+    /* padding: 30px; */
+    /* margin-right: 10px; */
+    background-color: #FDF1DB;
+    border: 0.1px solid #1E5128;
+    /* border-radius: 5px; */
+}
+.border a {
+    text-decoration: none;
+    text-align: center;
+    color: #1E5128;
+    text-align: center;
+}
+.border a:hover {
+    color: #A7D129;
+}
+
+.img_container img {
+    width: 250px;
+    height: 220px;
+    object-fit: cover;
+
+}
+.doc-info-box {
+    padding-top: 15px;
+    height: 100px;
+    width: 100%;
+    text-align: center;
+
+}
+/* .doc-info-box h4, .doc-info-box h5 {
+    padding-top: 20px;
+} */
+

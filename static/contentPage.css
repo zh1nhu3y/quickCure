@@ -1,0 +1,135 @@
+body {
+    margin: 0px;
+}
+
+.content-box-1 {
+    background-color: #EEE7DA;
+    padding-top: 5px;
+}
+.content-title {
+    font-size: 20px;
+    padding-left: 70px;
+}
+.content-title a {
+    text-decoration: none;
+    color: #1E5128;
+}
+.content-box-2{
+    background-color: #F1F0EB;
+    padding: 30px;
+    
+}
+.content-box-3{
+    background-color: #F2F1EB;
+    border: 2px solid black;
+    width: 750px;
+    margin: 15px 0px 0px 350px;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+img {
+    height: 300px;
+    width: 500;
+    text-align: center;
+    mix-blend-mode:darken;
+    background-color: transparent;
+    padding: 5px 0px 15px 110px;
+}
+
+.proc-container p {
+    font-size: 1.2em;
+    color: #333333;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* comment */
+.comment-container {
+    width: 80%;
+    margin: auto;
+}
+.comment-count h4{
+    font-weight: 700;
+    color: #304D30;
+}
+.comment-container textarea {
+    resize: none;
+}
+.btn-comment {
+    margin-top: 8px;
+    width: 150px;
+    margin-left: auto; 
+    display: block;
+    background-color: #7FC7D9;
+    color: #fff;
+}
+.comment-login {
+    background: #EEE7DA;
+    padding: 30px 30px;
+    text-align: center;
+    border-radius: 5px;
+}
+.comment-login h4 {
+    font-size: 20px;
+    font-weight: 600;
+    padding-bottom: 8px;
+}
+.comment-login .join-btn {
+    width: 100px;
+    margin: auto; 
+    display: block;
+    background-color: #7FC7D9;
+    color: #fff;
+}
+.comment-container button:hover, .btn-comment:hover {
+    background-color: #AAD7D9;
+}
+.comment {
+    background: #F8FAE5;
+    padding: 15px 50px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+.comment-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: first baseline;
+}
+.comment-head h5 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #B99470;
+}
+.comment-head p {
+    font-weight: 600;
+    color: dimgrey;
+}
+.comment h5 {
+    font-size: 18px;
+}
+
+/* save procedure */
+.save {
+    width: 50px;
+    display: flex;
+    align-items: baseline;
+    position: absolute;
+    margin-left: 85em;
+    margin-top: -4em;
+}
+.save p {
+    font-size: 30px;
+    margin-left: 10px;
+}
+.save button{
+    background: none;
+    outline: none;
+    border: none;
+}
+.save button:hover {
+    cursor: pointer;
+}
+.save i{
+    font-size: 32px;
+    color: green;
+}

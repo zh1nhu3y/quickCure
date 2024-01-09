@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css')}}" type="text/css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+{% endblock %}
+
+{% block body %}
+<div class="home-container">
+    <div class="search-container">
+        <h1 class="title">Quick Cure</h1>
+        <div class="search">
+            <div class="search-wrapper">
+                <input type="text" class="search-input" id="search-input" placeholder="Search...">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            </div>
+        </div>
+        <div class="search-result" id="result"></div>
+    </div>
+
+    <div class="recommendation-cont">
+        {% if procedures %}
+            <div class="rec-title">
+                <h5>Frequent Search Procedures</h5>
+                {% for procedure in procedures %}
+                    <div class="rec-procedure">
+                        <i class="fa-solid fa-arrow-right"></i>
+                        <a href="/contentPage/{{ procedure['fa_id']}}">{{ procedure['fa_title'] }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No procedures found</p>
+        {% endif %}
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function(){
+        console.log('jQuery is working!');
+    });
+    $(document).ready(function(){
+        // load_data();
+        
+        function load_data(query) {
+            $.ajax({
+                url: "/ajaxlivesearch",
+                method: "POST",
+                data: { query: query },
+                success: function (data) {
+                    console.log(data);
+                    $('#result').html(data.htmlresponse);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("AJAX Error: " + textStatus);
+                    console.log("AJAX Error thrown: " + errorThrown);
+                }
+            });
+        }
+
+        $(document).ready(function () {
+
+            $('#search-input').keyup(function () {
+                var search = $(this).val();
+                load_data(search);
+            });
+        });
+    });
+</script>
+{% endblock %}

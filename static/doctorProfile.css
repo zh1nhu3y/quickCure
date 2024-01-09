@@ -1,0 +1,74 @@
+body {
+    margin: 0px;
+    color: #1E5128;
+}
+.doc-box {
+    height: 75vh;
+}
+img {
+    height: 244px;
+    width: 300px;
+    object-fit: cover;
+}
+.doc-info-parent {
+    text-align: center;
+}
+.doc-info-child-a, .doc-info-child-b {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.doc-info-child-b {
+    padding-left: 60px;
+}
+.doc-info-child-b a {
+    text-decoration: none;
+    color: #1E5128;
+}
+.doc-info-child-b h4 {
+    padding-bottom: 30px;
+}
+.doc-info-child-b h1 {
+    font-size: 2.5em;
+}
+
+.horizontal-line {
+    width: 80%;
+    border-top: 2px solid;
+    margin: 10px auto 0px auto;
+}
+
+.left-content {
+    padding: 1.1em 0em 0px 10em;
+}
+.left-content h3, .right-content h3 {
+    padding-left: 20px;
+    font-size: 20px;
+}
+.right-content {
+    float: right;
+    margin-top: -15.5em;
+    margin-right: 12em;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+ul li a {
+    text-decoration: none;
+    color: #1E5128;
+}
+ul li a:hover {
+    color: #A7D129;
+    text-decoration: none;
+}
+
+.vl {
+    border-left: 2px solid;
+    height: 270px;
+    position: absolute;
+    left: 50%;
+    margin-left: -3px;
+    top: 24.5em;
+  }

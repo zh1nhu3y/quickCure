@@ -3,12 +3,13 @@ from flask_mysqldb import MySQL, MySQLdb
 import base64
 from flask_session import Session
 from datetime import datetime, timedelta
-from flask_cors import CORS
-from dotenv import load_dotenv
+from flask_restful import Resource, Api, reqparse
+import nltk
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
-load_dotenv()
+
 app = Flask(__name__)
-CORS(app)
+api = Api(app)
 app.secret_key = '123'
 app.jinja_env.filters['zip'] = zip
 

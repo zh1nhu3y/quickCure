@@ -59,7 +59,7 @@ ul li a {
     text-decoration: none;
     color: #1E5128;
 }
-ul li a:hover {
+.right-content ul li a:hover {
     color: #A7D129;
     text-decoration: none;
 }

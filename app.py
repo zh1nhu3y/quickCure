@@ -3,8 +3,12 @@ from flask_mysqldb import MySQL, MySQLdb
 import base64
 from flask_session import Session
 from datetime import datetime, timedelta
+from flask_cors import CORS
+from dotenv import load_dotenv
 
+load_dotenv()
 app = Flask(__name__)
+CORS(app)
 app.secret_key = '123'
 app.jinja_env.filters['zip'] = zip
 
@@ -13,6 +17,7 @@ app.config['MYSQL_USER'] = "root"
 app.config['MYSQL_PASSWORD'] = ""
 app.config['MYSQL_DB'] = "quickcure"
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+# app.config['MYSQL_PORT'] = 3306
 
 mysql = MySQL(app)
 
@@ -27,19 +32,16 @@ def ourDoctors():
         cur.execute("SELECT * FROM doctor")
 
         results = cur.fetchall()
-        # print (results)
+        user_id = session.get('id')
         
         doctor_data = []
         
         for result in results:
-            # print(f"Debug: result: {result}")
             doctor_id = result['doctor_id']
             doctor_name = result['doctor_name']
             doctor_position = result['doctor_position']
 
             doctor_img_base64 = base64.b64encode(result['doctor_img']).decode('utf-8') if result['doctor_img'] and result['doctor_img'] != b'' else None
-
-            # print(f"Debug: doctor_id: {doctor_id}")
             
             doctor_data.append({
                 'doctor_id': doctor_id,
@@ -50,17 +52,16 @@ def ourDoctors():
             
         cur.close()
             
-    return render_template('ourDoctors.html', doctor_data=doctor_data)
+    return render_template('ourDoctors.html', doctor_data=doctor_data, user_id=user_id)
 
 
 @app.route('/doctorProfile/<int:doctor_id>')
 def doctorProfile(doctor_id):
-    print(f"doctor_id from URL: {doctor_id}")
     with mysql.connection.cursor(MySQLdb.cursors.DictCursor) as cur:
         cur.execute("SELECT * FROM doctor JOIN first_aid_title ON doctor.doctor_id = first_aid_title.doctor_id WHERE doctor.doctor_id = %s", (doctor_id,))
         results = cur.fetchall()
-        # print (result)
         
+        user_id = session.get('id')
         doc_data = {}
         
         for result in results:
@@ -89,7 +90,7 @@ def doctorProfile(doctor_id):
             })
 
         cur.close()
-    return render_template('doctorProfile.html', doc_data=list(doc_data.values()))
+    return render_template('doctorProfile.html', doc_data=list(doc_data.values()), user_id=user_id)
 
 
 @app.route('/')
@@ -140,7 +141,7 @@ def signup():
             cur.execute("INSERT INTO `user` (`user_email`, `user_password`) VALUES (%s, %s)", (email, password))
             mysql.connection.commit()
             cur.close()
-            return redirect(url_for('index'))
+            return redirect(url_for('home'))
 
         elif role == 'doctor':
             cur = mysql.connection.cursor()
@@ -161,7 +162,6 @@ def logout():
 @app.route('/ajaxlivesearch', methods=['POST', 'GET'])
 def ajaxlivesearch():
     search_word = request.form.get('query', '')
-    print("Received search query:", search_word)
 
     if search_word:
         try:
@@ -185,7 +185,6 @@ def contentPage(id):
     with mysql.connection.cursor(MySQLdb.cursors.DictCursor) as cur:
         cur.execute("SELECT * FROM first_aid_title JOIN doctor ON first_aid_title.doctor_id = doctor.doctor_id JOIN first_aid_content ON first_aid_title.fa_id = first_aid_content.fa_id WHERE first_aid_title.fa_id = %s", (id,))
         content_results = cur.fetchall()
-        # print(f"Content Results: {content_results}")
         
         content = {}
         
@@ -207,8 +206,6 @@ def contentPage(id):
             if result['content']:
                 content_img_base64 = base64.b64encode(result['content_image']).decode('utf-8') if result['content_image'] and result['content_image'] != b'' else None
                 content[fa_id]['content'].append((content_img_base64, result['content']))
-        
-        # print(f"Content Dictionary: {content}")
         
         # Comment Section
         

@@ -3,8 +3,24 @@
 {% block head %}
     <title>Send Help</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css')}}" type="text/css">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='sendHelp.css')}}" type="text/css">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8FZn4GPUsB8cyPc9DciCJdwHrAsf77iE&callback=initMap"></script>
 {% endblock %}
+
 {% block body %}
-<div>hello</div>
+<div class="send-help-container">
+    <h3>Send Help</h3>
+    <label class="form-label">Name</label>
+    <input type="text" name="name" id="" class="form-control mb-3 send-help-input" placeholder="Enter a name">
+    <label class="form-label">Phone Number</label>
+    <input type="text" name="phone-number" id="" class="form-control mb-3 send-help-input" placeholder="01X-XXXXXXXX">
+    <label class="form-label">Current Condition</label>
+    <input type="text" name="current-condition" id="" class="form-control mb-3 send-help-input" placeholder="Enter current condition">
+    <label class="form-label">Current Location</label>
+    <div id="map"></div>
+
+    <button class="btn send-help-btn" id="send-help-btn">Send Help</button>
+</div>
+
+<script src="{{url_for('static', filename='js/map.js')}}"></script>
 {% endblock %}

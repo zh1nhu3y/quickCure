@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block head %}
+<title></title>
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css')}}" type="text/css">
+<link rel="stylesheet" href="{{ url_for('static', filename='sendHelp.css')}}" type="text/css">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.2/dist/js/bootstrap.bundle.min.js"></script>
+{% endblock %}
+{% block body %}
+
+<div class="map-container">
+    <div id="map"></div>
+</div>
+
+
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCBbskdy4cAeUPqcfAIJzniR68D2p0QJtM&callback=initMap">
+</script>
+<script>
+    function initMap() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+
+                var userLat = 3.1481978;
+                var userLng = 101.7066028;
+                
+                var userCoords = new google.maps.LatLng(userLat, userLng);
+
+                var mapOptions = {
+                    zoom: 18,
+                    center: userCoords,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP,
+                };
+
+                var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+                var userMarker = new google.maps.Marker({
+                    map: map,
+                    position: userCoords,
+                    title: "Current Location",
+                });
+
+                var destinationCoords = new google.maps.LatLng(3.1483384, 101.7051075);
+
+                var movingMarker = new google.maps.Marker({
+                    map: map,
+                    position: destinationCoords,
+                    title: "Moving Marker",
+                    icon: {
+                        url: "static/image/ambulance.svg",
+                        scaledSize: new google.maps.Size(40, 32)
+                    },
+                });
+
+                var line = new google.maps.Polyline({
+                    path: [userCoords, destinationCoords],
+                    geodesic: true,
+                    strokeColor: '#C21010',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 3
+                });
+                line.setMap(map);
+
+                function moveMarker() {
+                    var latDiff = userLat - movingMarker.getPosition().lat();
+                    var lngDiff = userLng - movingMarker.getPosition().lng();
+
+                    var newPosition = new google.maps.LatLng(
+                        movingMarker.getPosition().lat() + (latDiff / 100),
+                        movingMarker.getPosition().lng() + (lngDiff / 100)
+                    );
+
+                    movingMarker.setPosition(newPosition);
+
+                    line.setPath([userCoords, movingMarker.getPosition()]);
+
+                    var distance = google.maps.geometry.spherical.computeDistanceBetween(userCoords, movingMarker.getPosition());
+
+                    if (distance < 16) {
+                        document.getElementById("notification-msg").innerHTML = "Ambulance arrived";
+                    }
+                    
+                    var distanceInKm = distance / 1000;
+                    var speedInKmPerHour = 1.95;
+                    var estimatedTimeInHours = distanceInKm / speedInKmPerHour;
+                    var estimatedTimeInMinutes = estimatedTimeInHours * 60;
+
+                    document.getElementById("estimatedArrivalTime").innerHTML = estimatedTimeInMinutes.toFixed(0) + " minute(s)";
+                }
+
+                setInterval(moveMarker, 210);
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+    
+    
+</script>
+<style>
+    #map {
+        width: 100%;
+        height: 500px;
+    }
+    .map-container {
+        width: 50%;
+        margin: auto;
+    }
+</style>
+<div>
+    <div class="notification-cont">
+        <div class="notification-box">
+            <h3><span id="notification-msg">Ambulance is on the way</span></h3>
+            <p>Estimated Time Arrival: <span id="estimatedArrivalTime"></span></p>
+            <p>Please stay calm</p>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

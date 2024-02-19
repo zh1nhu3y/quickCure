@@ -4,23 +4,74 @@
     <title>Send Help</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css')}}" type="text/css">
     <link rel="stylesheet" href="{{ url_for('static', filename='sendHelp.css')}}" type="text/css">
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8FZn4GPUsB8cyPc9DciCJdwHrAsf77iE&callback=initMap"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.7.2/dist/js/bootstrap.bundle.min.js"></script>
+
 {% endblock %}
 
 {% block body %}
 <div class="send-help-container">
     <h3>Send Help</h3>
-    <label class="form-label">Name</label>
-    <input type="text" name="name" id="" class="form-control mb-3 send-help-input" placeholder="Enter a name">
-    <label class="form-label">Phone Number</label>
-    <input type="text" name="phone-number" id="" class="form-control mb-3 send-help-input" placeholder="01X-XXXXXXXX">
+    <label class="form-label">*Name</label>
+    <input type="text" name="name" id="name" class="form-control mb-3 send-help-input required-input" value="{% if user_data %}{{ user_data[0]['user_name'] }}{% endif %}" placeholder="Enter a name">
+    <label class="form-label">*Phone Number</label>
+    <input type="text" name="phone-number" id="phone-number" class="form-control mb-3 send-help-input required-input" value="{% if user_data %}{{ user_data[0]['user_phonenum'] }}{% endif %}" placeholder="01X-XXXXXXXX">
     <label class="form-label">Current Condition</label>
-    <input type="text" name="current-condition" id="" class="form-control mb-3 send-help-input" placeholder="Enter current condition">
+    <input type="text" name="current-condition" id="current-condition" class="form-control mb-3 send-help-input" placeholder="Enter current condition">
+
+    <label class="form-label">*Upload Image</label>
+    <input type="file" name="current-condition" id="image-file" class="form-control-file mb-3 send-help-input required-input">
+    <div class="image-scan mb-3 display-none" id="image-container">
+        <img src="" alt="" id="image" class="image-height display-none">
+        <img src="static/image/loading-google.gif" alt="" class="loading display-none" id="loading-image">
+    </div>
+
     <label class="form-label">Current Location</label>
     <div id="map"></div>
 
     <button class="btn send-help-btn" id="send-help-btn">Send Help</button>
 </div>
 
+
+<div class="modal" tabindex="-1" role="dialog" id="minor-injury-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="text-center minor-injury mt-3">Your injury appears to be minor. </h5>
+                <h6 class="text-center minor-injury-message">Please follow the recommended first aid procedure below for immediate relief. If the situation persists or worsens, seek medical attention.</h6>
+                <button class="btn mt-2 mb-3 send-help-btn">First Aid Procedure</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="send-help-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="icon-bg">
+                    <div class="send-help-icon"><i class="check fa-solid fa-check"></i></div>
+                </div>
+                    <h4 class="text-center send-help-title">Help Sent Successfully</h4>
+                <div class="send-help-message">
+                    <p>Contacting the nearest ambulance...</p>
+                    <p>Please stay at current location and wait for our contact.</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn send-help-close" id="send-help-close">CLOSE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="{{url_for('static', filename='js/map.js')}}"></script>
+
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8FZn4GPUsB8cyPc9DciCJdwHrAsf77iE&callback=initMap">
+</script>
+
 {% endblock %}

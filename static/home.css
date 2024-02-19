@@ -105,3 +105,68 @@
     background: #F5F7F8;
 
 }
+/* scan image home page */
+
+.file-input{
+    display: none;
+}
+.upload-icon {
+    position: absolute;
+    font-size: 18px;
+    top: 50%;
+    right: 15px; /* Adjust the right position based on your design */
+    transform: translateY(-50%);
+    color: #A9A9A9;
+    cursor: pointer;
+    background-color: #f0f0f0; /* Specify your desired background color */
+    border-radius: 50%; /* Ensure the icon is round */
+    padding: 10px;
+}
+.upload-icon:hover {
+    background-color: #BFCFE7;
+    color: #fff;
+}
+.image-scan {
+    text-align: center;
+    /* border: 2px solid #596FB7; */
+    /* background: whitesmoke; */
+    position: relative;
+    width: 50%;
+    left: 25%;
+    margin-top: 30px;
+
+}
+.image-height{
+    height: 250px;
+    /* background: bisque; */
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.display-none {
+    display: none;
+}
+.loading-img {
+    filter: brightness(70%);
+}
+.loading{
+    width: 70px;
+    position: absolute;
+    top: 40%;
+    left: 45%;
+}
+.minor-injury{
+    font-weight: 700;
+    color: #820300;
+}
+.minor-injury-message {
+    line-height: 1.8;
+}
+.send-help-btn {
+    margin: 30px 0;
+    background: #A9907E;
+    color: #fff;
+}
+.send-help-btn:hover {
+    background: #8B7E74;
+}
+
+

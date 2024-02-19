@@ -90,6 +90,10 @@
                     </button>
                     <h4 class="text-center signup-title">Signup</h4>
                     <form action="/signup" method="post" onsubmit="return checkAndValidatePassword();">
+
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" required name="name">
+
                         <label class="form-label">Email</label>
                         <input type="email" class="form-control mb-3" required name="email">
 
@@ -101,6 +105,10 @@
                         <input type="password" class="form-control" required id="confPass" oninput="validatePassword()">
                         <div id="message1" class="mb-3"></div>
 
+                        <label class="form-label">Phone Number</label>
+                        <input type="text" class="form-control" required id="" name="phone-number" placeholder="01X-XXXXXXX">
+                        <div id="message1" class="mb-3"></div>
+                      
                         <label for="role" class="form-label">Role</label>
                         <select class="form-control mb-4" id="role" required name="role">
                             <option value="user">User</option>
@@ -124,7 +132,7 @@
         <ul class="footer_nav">
             <h3>Menu</h3>
             <li class="footer_nav_item">
-                <a href="/home">Home</a>
+                <a href="/">Home</a>
             </li>
             <li class="footer_nav_item">
                 <a href="/ourDoctors">Our Doctors</a>
@@ -138,6 +146,7 @@
             <li class="footer_nav_item">
                 <a href="/login">Login</a>
             </li>
+            
         </ul>
 
         <ul class="footer_nav">

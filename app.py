@@ -132,11 +132,13 @@ def signup():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+        phonenum = request.form['phone-number']
+        name = request.form['name']
         role = request.form['role']
 
         if role == 'user':
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO `user` (`user_email`, `user_password`) VALUES (%s, %s)", (email, password))
+            cur.execute("INSERT INTO `user` (`user_email`, `user_password`, `user_phonenum`, `user_name`) VALUES (%s, %s, %s, %s)", (email, password, phonenum, name))
             mysql.connection.commit()
             cur.close()
             return redirect(url_for('home'))
@@ -300,8 +302,42 @@ def saved_procedure():
 @app.route("/send_help")
 def sendHelp():
     user_id = session.get('id')
+    cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     
-    return render_template('sendHelp.html', user_id=user_id)
+    cur.execute("SELECT * FROM user WHERE user_id = %s", (user_id,))
+    user_data = cur.fetchall()
+    cur.close()
+    
+    return render_template('sendHelp.html', user_id=user_id, user_data=user_data)
+
+
+@app.route('/insertContent', methods=['GET', 'POST'])
+def insertContent():
+    """function for add content"""
+    
+    if request.method == 'POST':
+        fa_id = request.form["faID"]
+        fa_content = request.form["faContent"]
+        
+        fa_img = request.files["faImage"]
+        binary_data = fa_img.read()
+        
+        cur = mysql.connection.cursor()
+        
+        cur.execute("INSERT INTO first_aid_content (fa_id, content, content_image) VALUES (%s, %s, %s)", (fa_id, fa_content, binary_data))
+        
+        mysql.connection.commit()
+        cur.close()
+        
+        flash('Success', 'success')
+        
+    return render_template("insertContent.html")
+
+@app.route('/majorSendHelp')
+def majorSendHelp():
+    user_id = session.get(id)
+    
+    return render_template("majorSendHelp.html", user_id=user_id)
 
 
 if __name__ == "__main__":

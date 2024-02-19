@@ -15,9 +15,16 @@
             <div class="search-wrapper">
                 <input type="text" class="search-input" id="search-input" placeholder="Search...">
                 <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <label class="form-label" for="home-image" class="image-label"><i class="fa-regular fa-image upload-icon"></i></label>
+                <input type="file" name="injury-image" id="home-image" class="mb-3 file-input">
             </div>
         </div>
         <div class="search-result" id="result"></div>
+    </div>
+
+    <div class="image-scan mb-3 display-none" id="image-container">
+        <img src="" alt="" id="image" class="image-height display-none">
+        <img src="static/image/loading-google.gif" alt="" class="loading display-none" id="loading-image">
     </div>
 
     <div class="recommendation-cont">
@@ -36,6 +43,38 @@
         {% endif %}
     </div>
 </div>
+
+<div class="modal" tabindex="-1" role="dialog" id="minor-injury-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="text-center minor-injury mt-3">Your injury appears to be minor. </h5>
+                <h6 class="text-center minor-injury-message">Please follow the recommended first aid procedure below for immediate relief. If the situation persists or worsens, seek medical attention.</h6>
+                <button class="btn mt-2 mb-3 send-help-btn">First Aid Procedure</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="major-injury-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="text-center minor-injury mt-3">Emergency Alert: Major Injury Detected</h5>
+                <h6 class="text-center minor-injury-message">Please use the "Send Help" feature immediately to call for ambulance assistance.</h6>
+                <button onclick="window.location.href='/send_help'" class="btn mt-2 mb-3 send-help-btn">Send Help</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
 
 
 <script>

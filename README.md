@@ -63,10 +63,4 @@ Before running the code, ensure you have the following installed:
      python app.py
      ```
 
-   - Access the application in your web browser at `http://localhost:5000`.
-
-## Additional Notes
-
-- Modify the database connection settings in the Python files (`config.py`, `app.py`) if necessary.
-- Customize the frontend and backend code according to your requirements.
-- For any issues or inquiries, please contact [panzhinhuey@gmail.com].
+   - Access the application in your web browser at `http://localhost:5000`
